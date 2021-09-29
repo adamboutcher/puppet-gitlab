@@ -70,7 +70,7 @@ class gitlab::runner (
       provider => 'shell',
       path     => '/usr/bin/',
       unless   => "cat /etc/gitlab-runner/config.toml | grep -i $runner_url",
-      require  => Service['gitlab-runner'],
+      require  => Package['gitlab-runner'],
       notify   => Service['gitlab-runner'],
     }
   }
