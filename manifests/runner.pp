@@ -16,7 +16,7 @@ class gitlab::runner (
   if ( $::osfamily != 'RedHat' ) {
     notify {'gitlab_notice':
       message => 'This module is only tested on RedHat based machines, some config might be missing.',
-      before  => Package ['gitlab-runner'],
+      before  => Package['gitlab-runner'],
     }
   }
 
@@ -50,7 +50,7 @@ class gitlab::runner (
     enable     => $enable,
     hasstatus  => true,
     hasrestart => true,
-    require    => Packages ['gitlab-runner'],
+    require    => Packages['gitlab-runner'],
   }
 
   if $docker_runner {
@@ -63,13 +63,13 @@ class gitlab::runner (
     if $docker_runner {
       $runner_config_line = "gitlab-runner register -n --url $runner_url --registration-token $runner_tkn --executor docker"
     } else {
-      $runner_config_line = "gitlab-runner register -n --url $runner_url --registration-token $runner_tkn --executor shell",
+      $runner_config_line = "gitlab-runner register -n --url $runner_url --registration-token $runner_tkn --executor shell"
     }
     exec { 'gitlab_configure':
       command  => "$runner_config_line",
       provider => 'shell',
       path     => '/usr/bin/',
-      unless   => "cat /etc/gitlab-runner/config.toml | grep -i $runner_url"
+      unless   => "cat /etc/gitlab-runner/config.toml | grep -i $runner_url",
       require  => Service['gitlab-runner'],
       notify   => Service['gitlab-runner'],
     }
@@ -87,7 +87,7 @@ class gitlab::runner::docker {
 
   notify {'gitlab_docker_notice':
     message => 'Please install docker.',
-    before  => Package ['gitlab-runner'],
+    before  => Package['gitlab-runner'],
   }
 
 }

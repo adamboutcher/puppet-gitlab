@@ -8,6 +8,8 @@ class gitlab::repos::runner {
       include gitlab::repos::runner::apt
     }
 
+  }
+
 }
 
 class gitlab::repos::runner::yum {
@@ -24,6 +26,7 @@ class gitlab::repos::runner::yum {
     sslcacert           => '/etc/pki/tls/certs/ca-bundle.crt',
     skip_if_unavailable => 1,
     metadata_expire     => 300,
+    before              => Package['gitlab-runner'],
   }
   yumrepo { 'runner_gitlab-runner-source':
     name                => 'GitLab - Runner for Enterprise Linux $releasever ($basearch) SRC',
@@ -37,6 +40,7 @@ class gitlab::repos::runner::yum {
     sslcacert           => '/etc/pki/tls/certs/ca-bundle.crt',
     skip_if_unavailable => 1,
     metadata_expire     => 300,
+    before              => Package['gitlab-runner'],
   }
 
 }
@@ -44,7 +48,10 @@ class gitlab::repos::runner::yum {
 class gitlab::repos::runner::apt {
 
   # Need to add
-
+  notify {'gitlab_apt_notice':
+    message => 'Apts repos are missing, if you know how then please PR.',
+    before  => Package['gitlab-runner'],
+  }
 }
 
 
@@ -75,6 +82,7 @@ class gitlab::repos::ce::yum {
     sslcacert           => '/etc/pki/tls/certs/ca-bundle.crt',
     skip_if_unavailable => 1,
     metadata_expire     => 300,
+    before              => Package['gitlab-ce'],
   }
   yumrepo { 'gitlab_gitlab-ce-source':
     name                => 'GitLab - Gitlab CE for Enterprise Linux $releasever ($basearch)',
@@ -88,6 +96,7 @@ class gitlab::repos::ce::yum {
     sslcacert           => '/etc/pki/tls/certs/ca-bundle.crt',
     skip_if_unavailable => 1,
     metadata_expire     => 300,
+    before              => Package['gitlab-ce'],
   }
 
 }
@@ -96,5 +105,9 @@ class gitlab::repos::ce::yum {
 class gitlab::repos::ce::apt {
 
   # Need to add
+  notify {'gitlab_apt_notice':
+    message => 'Apts repos are missing, if you know how then please PR.',
+    before  => Package['gitlab-ce'],
+  }
 
 }

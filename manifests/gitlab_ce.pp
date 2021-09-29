@@ -11,7 +11,7 @@ class gitlab::gitlab_ce (
   if ( $::osfamily != 'RedHat' ) {
     notify {'gitlab_notice':
       message => 'This module is only tested on RedHat based machines, some config might be missing.',
-      before  => Package ['gitlab-runner'],
+      before  => Package['gitlab-ce'],
     }
   }
 
@@ -28,13 +28,13 @@ class gitlab::gitlab_ce (
   service { 'gitlab-ce':
     ensure     => $svc_gstate,
     enable     => $enable,
-    start      => "$gitlabctl start"
-    stop       => "$gitlabctl stop"
-    restart    => "$gitlabctl restart"
-    status     => "$gitlabctl status"
+    start      => "$gitlabctl start",
+    stop       => "$gitlabctl stop",
+    restart    => "$gitlabctl restart",
+    status     => "$gitlabctl status",
     hasstatus  => true,
     hasrestart => true,
-    require    => Packages ['gitlab-ce'],
+    require    => Packages['gitlab-ce'],
   }
 
 
