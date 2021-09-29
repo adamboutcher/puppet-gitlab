@@ -65,6 +65,7 @@ class gitlab::repos::ce {
     'Debian': {
       include gitlab::repos::ce::apt
     }
+  }
 
 }
 
