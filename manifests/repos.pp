@@ -15,7 +15,7 @@ class gitlab::repos::runner {
 class gitlab::repos::runner::yum {
 
   yumrepo { 'runner_gitlab-runner':
-    name                => 'GitLab - Runner for Enterprise Linux $releasever ($basearch)',
+    descr               => 'GitLab - Runner for Enterprise Linux $releasever ($basearch)',
     target              => '/etc/yum.repo.d/runner_gitlab-runner.repo',
     baseurl             => 'https://packages.gitlab.com/runner/gitlab-runner/el/$releasever/$basearch',
     enabled             => 1,
@@ -29,7 +29,7 @@ class gitlab::repos::runner::yum {
     before              => Package['gitlab-runner'],
   }
   yumrepo { 'runner_gitlab-runner-source':
-    name                => 'GitLab - Runner for Enterprise Linux $releasever ($basearch) SRC',
+    descr               => 'GitLab - Runner for Enterprise Linux $releasever ($basearch) SRC',
     target              => '/etc/yum.repo.d/runner_gitlab-runner.repo',
     baseurl             => 'https://packages.gitlab.com/runner/gitlab-runner/el/$releasever/SRPMS',
     enabled             => 1,
@@ -72,7 +72,7 @@ class gitlab::repos::ce {
 class gitlab::repos::ce::yum {
 
   yumrepo { 'gitlab_gitlab-ce':
-    name                => 'GitLab - Gitlab CE for Enterprise Linux $releasever ($basearch)',
+    descr               => 'GitLab - Gitlab CE for Enterprise Linux $releasever ($basearch)',
     target              => '/etc/yum.repo.d/runner_gitlab-runner.repo',
     baseurl             => 'https://packages.gitlab.com/gitlab/gitlab-ce/el/$releasever/$basearch',
     enabled             => 1,
@@ -86,7 +86,7 @@ class gitlab::repos::ce::yum {
     before              => Package['gitlab-ce'],
   }
   yumrepo { 'gitlab_gitlab-ce-source':
-    name                => 'GitLab - Gitlab CE for Enterprise Linux $releasever ($basearch)',
+    descr               => 'GitLab - Gitlab CE for Enterprise Linux $releasever ($basearch)',
     target              => '/etc/yum.repo.d/runner_gitlab-runner.repo',
     baseurl             => 'https://packages.gitlab.com/gitlab/gitlab-ce/el/$releasever/SRPMS',
     enabled             => 1,
