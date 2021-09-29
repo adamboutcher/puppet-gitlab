@@ -50,7 +50,7 @@ class gitlab::runner (
     enable     => $enable,
     hasstatus  => true,
     hasrestart => true,
-    require    => Packages['gitlab-runner'],
+    require    => Package['gitlab-runner'],
   }
 
   if $docker_runner {
