@@ -7,6 +7,7 @@ class gitlab::runner (
   $config_runner = $gitlab::params::config_runner,
   $runner_url    = $gitlab::params::runner_url,
   $runner_tkn    = $gitlab::params::runner_tkn,
+  $runner_home   = $gitlab::params::runner_home,
 ) inherits ::gitlab::params {
 
   include gitlab::repos::runner
@@ -22,6 +23,20 @@ class gitlab::runner (
   $enable = $svc_rstate ? {
     'running' => true,
     'stopped' => false,
+  }
+
+  if $runner_home {
+    group { 'gitlab-runner':
+      ensure => present,
+      system => true,
+    }
+    user { 'gitlab-runner':
+      home    => $runner_home,
+      gid     => 'gitlab-runner',
+      system  => true,
+      require => Group['gitlab-runner'],
+      before  => Package['gitlab-runner'],
+    }
   }
 
   package { 'gitlab-runner':

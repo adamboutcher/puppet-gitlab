@@ -7,6 +7,7 @@ class gitlab::params {
   $config_runner = false
   $runner_url    = ""
   $runner_tkn    = ""
+  $runner_home   = undef
 
   # Gitlab version
   $pkg_gversion = 'latest'
