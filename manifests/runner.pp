@@ -37,6 +37,13 @@ class gitlab::runner (
       require => Group['gitlab-runner'],
       before  => Package['gitlab-runner'],
     }
+    file { "$runner_home":
+      ensure  => 'directory',
+      mode    => '0770',
+      owner   => 'gitlab-runner',
+      group   => 'gitlab-runner',
+      require => User['gitlab-runner'],
+    }
   }
 
   package { 'gitlab-runner':
