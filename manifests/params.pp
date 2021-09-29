@@ -4,6 +4,10 @@ class gitlab::params {
   $pkg_rversion = 'latest'
   $docker_runner = false
 
+  $config_runner = false
+  $runner_url    = ""
+  $runner_tkn    = ""
+
   # Gitlab version
   $pkg_gversion = 'latest'
 

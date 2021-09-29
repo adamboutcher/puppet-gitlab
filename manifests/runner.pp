@@ -4,6 +4,9 @@ class gitlab::runner (
   $pkg_rversion  = $gitlab::params::pkg_rversion,
   $pkg_rname     = $gitlab::params::pkg_rname,
   $docker_runner = $gitlab::params::docker_runner,
+  $config_runner = $gitlab::params::config_runner,
+  $runner_url    = $gitlab::params::runner_url,
+  $runner_tkn    = $gitlab::params::runner_tkn,
 ) inherits ::gitlab::params {
 
   include gitlab::repos::runner
@@ -39,6 +42,22 @@ class gitlab::runner (
     include gitlab::runner::docker
   } else {
     include gitlab::runner::shell
+  }
+
+  if $config_runner {
+    if $docker_runner {
+      $runner_config_line = "gitlab-runner register -n --url $runner_url --registration-token $runner_tkn --executor docker"
+    } else {
+      $runner_config_line = "gitlab-runner register -n --url $runner_url --registration-token $runner_tkn --executor shell",
+    }
+    exec { 'gitlab_configure':
+      command  => "$runner_config_line",
+      provider => 'shell',
+      path     => '/usr/bin/',
+      unless   => "cat /etc/gitlab-runner/config.toml | grep -i $runner_url"
+      require  => Service['gitlab-runner'],
+      notify   => Service['gitlab-runner'],
+    }
   }
 
 
