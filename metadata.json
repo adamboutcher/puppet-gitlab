@@ -7,6 +7,12 @@
   "source": "https://github.com/adamboutcher/puppet-gitlab",
   "project_page": "https://github.com/adamboutcher/puppet-gitlab",
   "issues_url": "https://github.com/adamboutcher/puppet-gitlab/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.0.0 < 9.0.0"
+    }
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -22,11 +28,17 @@
 	      "8"
       ]
     },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    }
   ],
   "requirements": [
     {
       "name": "puppet",
       "version_requirement": ">= 5.0.0 < 8.0.0"
     }
-  ],
+  ]
 }
