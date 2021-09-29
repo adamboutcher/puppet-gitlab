@@ -79,11 +79,12 @@ class gitlab::runner (
 }
 
 class gitlab::runner::shell {
-  include gitlab::runner::common
+  # shell Specific gitlab runner config
+
 }
 
 class gitlab::runner::docker {
-  include gitlab::runner::common
+   # Docker Specific gitlab runner config
 
   notify {'gitlab_docker_notice':
     message => 'Please install docker.',
