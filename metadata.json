@@ -1,8 +1,8 @@
 {
   "name": "adamboutcher-gitlab",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Adam Boutcher",
-  "summary": "Manages Firewalls such as iptables",
+  "summary": "Helps setup gitlab",
   "license": "Apache-2.0",
   "source": "https://github.com/adamboutcher/puppet-gitlab",
   "project_page": "https://github.com/adamboutcher/puppet-gitlab",
@@ -18,20 +18,30 @@
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "7",
-	      "8"
+	"8",
+        "9"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
 	      "7",
-	      "8"
+	      "8",
+              "9"
       ]
     },
     {
       "operatingsystem": "Rocky",
       "operatingsystemrelease": [
-        "8"
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Alma",
+      "operatingsystemrelease": [
+        "8",
+        "9"
       ]
     }
   ],
