@@ -12,7 +12,7 @@ class gitlab::params {
   # Gitlab version
   $pkg_gversion = 'latest'
 
-  case $::osfamily {
+  case $::os[family] {
     'RedHat': {
       # GitLab Runner
       $svc_rstate = 'running'

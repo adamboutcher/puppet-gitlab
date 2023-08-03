@@ -8,7 +8,7 @@ class gitlab::gitlab_ce (
   include gitlab::repos::ce
 
   # We're only using CentOS/RedHat systems
-  if ( $::osfamily != 'RedHat' ) {
+  if ( $::os[family] != 'RedHat' ) {
     notify {'gitlab_notice':
       message => 'This module is only tested on RedHat based machines, some config might be missing.',
       before  => Package['gitlab-ce'],

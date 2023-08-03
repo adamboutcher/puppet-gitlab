@@ -1,6 +1,6 @@
 class gitlab::repos::runner {
 
-  case $::osfamily {
+  case $::os[family] {
     'RedHat': {
       include gitlab::repos::runner::yum
     }

@@ -13,7 +13,7 @@ class gitlab::runner (
   include gitlab::repos::runner
 
   # We're only using CentOS/RedHat systems
-  if ( $::osfamily != 'RedHat' ) {
+  if ( $::os[family] != 'RedHat' ) {
     notify {'gitlab_notice':
       message => 'This module is only tested on RedHat based machines, some config might be missing.',
       before  => Package['gitlab-runner'],
